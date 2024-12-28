@@ -1,0 +1,85 @@
+{% extends "tienda/base.html" %}
+{% load static %}
+
+{% block title %}Contacto - CrissStore{% endblock %}
+
+{% block content %}
+<div class="container mt-4">
+    <h2 class="text-center display-4 mb-5">Contacto</h2>
+    <div class="row g-4">
+        <div class="col-md-6">
+            <div class="card shadow-sm h-100">
+                <div class="card-body">
+                    <h3 class="card-title mb-4">Envíanos un mensaje</h3>
+                    <form method="post">
+                        {% csrf_token %}
+                        {% for field in form %}
+                            <div class="mb-4">
+                                <label for="{{ field.id_for_label }}" class="form-label fw-bold">
+                                    {{ field.label }}
+                                </label>
+                                <div class="input-group" style="transition: all 0.3s ease;">
+                                    {{ field }}
+                                </div>
+                                {% if field.errors %}
+                                    <div class="invalid-feedback d-block">
+                                        {{ field.errors }}
+                                    </div>
+                                {% endif %}
+                            </div>
+                        {% endfor %}
+                        <button type="submit" 
+                                class="btn btn-primary btn-lg w-100"
+                                style="transition: all 0.3s ease;">
+                            Enviar Mensaje
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="card shadow-sm h-100">
+                <div class="card-body">
+                    <h3 class="card-title mb-4">Información de Contacto</h3>
+                    <div class="mb-4">
+                        <h5 class="mb-3">Ubicación</h5>
+                        <div class="rounded overflow-hidden shadow-sm">
+                            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3268.9142918155408!2d-71.24536791831078!3d-34.983811507572355!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x96645709d347bc4f%3A0x66440438a5bb7f6e!2sZapateria%20el%20Negro!5e0!3m2!1ses-419!2scl!4v1717112225003!5m2!1ses-419!2scl" 
+                                    width="100%" 
+                                    height="300" 
+                                    style="border:0;" 
+                                    allowfullscreen="" 
+                                    loading="lazy" 
+                                    referrerpolicy="no-referrer-when-downgrade">
+                            </iframe>
+                        </div>
+                    </div>
+                    <div class="mt-4">
+                        <h5 class="mb-3">Redes Sociales</h5>
+                        <div class="d-flex gap-3">
+                            <a href="#" class="btn btn-outline-primary" style="transition: all 0.3s ease;">
+                                Facebook
+                            </a>
+                            <a href="#" class="btn btn-outline-info" style="transition: all 0.3s ease;">
+                                Twitter
+                            </a>
+                            <a href="#" class="btn btn-outline-danger" style="transition: all 0.3s ease;">
+                                Instagram
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+    .input-group:hover {
+        transform: translateY(-2px);
+    }
+    .btn:hover {
+        transform: translateY(-2px);
+    }
+</style>
+{% endblock %}

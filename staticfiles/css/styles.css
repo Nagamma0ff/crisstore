@@ -1,0 +1,111 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+header {
+    background-color: #333;
+    color: white;
+    padding: 10px 0;
+    text-align: center;
+}
+
+nav {
+    background-color: #444;
+    display: flex;
+    justify-content: center;
+    padding: 10px;
+}
+
+nav a {
+    color: white;
+    margin: 0 15px;
+    text-decoration: none;
+}
+
+.custom-carousel {
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.carousel img {
+    max-height: 400px;
+    object-fit: contain;
+}
+
+.custom-carousel .carousel-item img {
+    width: 100%;
+    height: auto;
+}
+
+.productos-destacados, .sobre-nosotros {
+    padding: 20px 0;
+    text-align: center;
+}
+
+.productos {
+    padding: 20px;
+    text-align: center;
+}
+
+.contacto {
+    text-align: center;
+}
+
+.producto {
+    display: inline-block;
+    margin: 10px;
+    width: 30%;
+    border: 1px solid #ddd;
+    padding: 10px;
+}
+
+.producto img {
+    max-width: 100%;
+    height: auto;
+    max-height: 150px;
+}
+
+footer {
+    background-color: #333;
+    color: white;
+    padding: 20px;
+    text-align: center;
+}
+
+.redes-sociales a {
+    color: white;
+    margin: 0 10px;
+    text-decoration: none;
+}
+
+.carrito {
+    padding: 20px;
+    text-align: center;
+}
+
+.carrito .producto {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 10px auto;
+    width: 80%;
+    border: 1px solid #ddd;
+    padding: 10px;
+}
+
+.carrito .producto img {
+    max-width: 100px;
+    height: auto;
+    margin-right: 15px;
+}
+
+.carrito .precio {
+    color: #007bff;
+    font-weight: bold;
+}
+
+.carrito button {
+    margin-top: 20px;
+}

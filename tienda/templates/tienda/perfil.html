@@ -1,0 +1,55 @@
+{% extends "tienda/base.html" %}
+{% load static %}
+
+{% block title %}Perfil - CrissStore{% endblock %}
+
+{% block content %}
+<div class="container mt-4">
+    <h2 class="mb-4">Mi Perfil</h2>
+
+    <div class="row">
+        <div class="col-md-6">
+            <h3>Detalles de Usuario</h3>
+            <table class="table">
+                <tbody>
+                    <tr>
+                        <th>Nombre de Usuario</th>
+                        <td>{{ user.username }}</td>
+                    </tr>
+                    <tr>
+                        <th>Correo Electrónico</th>
+                        <td>{{ user.email }}</td>
+                    </tr>
+                    <tr>
+                        <th>Fecha de Creación</th>
+                        <td>{{ user.date_joined|date:"d M Y" }}</td>
+                    </tr>
+                    <tr>
+                        <th>Último Acceso</th>
+                        <td>{{ user.last_login|date:"d M Y H:i" }}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="col-md-6">
+            <h3>Mis Pedidos</h3>
+            <ul class="list-group">
+                {% for pedido in user.pedido_set.all %}
+                    <li class="list-group-item">
+                        <strong>Pedido #{{ pedido.id }}</strong>
+                        <br>
+                        <small>Fecha: {{ pedido.fecha_pedido|date:"d M Y" }}</small>
+                        <br>
+                        <small>Total: ${{ pedido.total }}</small>
+                        <br>
+                        <a href="{% url 'confirmacion_pedido' pedido.id %}" class="btn btn-info btn-sm mt-2">Ver Detalles</a>
+                    </li>
+                {% empty %}
+                    <li class="list-group-item">No has realizado ningún pedido aún.</li>
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+</div>
+{% endblock %}

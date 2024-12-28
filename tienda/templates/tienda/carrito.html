@@ -1,0 +1,68 @@
+{% extends "tienda/base.html" %}
+{% load static %}
+
+{% block title %}Carrito - CrissStore{% endblock %}
+
+{% block content %}
+<div class="container mt-4">
+    <h2 class="display-4 mb-4">Mi Carrito</h2>
+    {% if productos_carrito %}
+        <div class="card shadow-sm">
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table class="table table-hover align-middle">
+                        <thead class="table-light">
+                            <tr>
+                                <th>Producto</th>
+                                <th>Cantidad</th>
+                                <th>Precio</th>
+                                <th>Total</th>
+                                <th>Acciones</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for item in productos_carrito %}
+                            <tr>
+                                <td class="fw-bold">{{ item.producto.nombre }}</td>
+                                <td>{{ item.cantidad }}</td>
+                                <td>${{ item.producto.precio }}</td>
+                                <td class="fw-bold text-primary">${{ item.subtotal }}</td>
+                                <td>
+                                    <form method="post" action="{% url 'eliminar_del_carrito' item.producto.id %}">
+                                        {% csrf_token %}
+                                        <button type="submit" 
+                                                class="btn btn-danger btn-sm"
+                                                style="transition: all 0.3s ease;">
+                                            Eliminar
+                                        </button>
+                                    </form>
+                                </td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                        <tfoot>
+                            <tr>
+                                <td colspan="3" class="fw-bold h5">Total</td>
+                                <td colspan="2" class="fw-bold h5 text-primary">${{ total }}</td>
+                            </tr>
+                        </tfoot>
+                    </table>
+                </div>
+                <div class="mt-4">
+                    <a href="{% url 'resumen_pedido' %}" 
+                       class="btn btn-success btn-lg px-5"
+                       style="transition: all 0.3s ease;">
+                        Finalizar Compra
+                    </a>
+                </div>
+            </div>
+        </div>
+    {% else %}
+        <div class="alert alert-info p-4 text-center">
+            <h4 class="alert-heading">Tu carrito está vacío</h4>
+            <p class="mb-0">¿Por qué no exploras nuestros productos?</p>
+            <a href="{% url 'productos' %}" class="btn btn-primary mt-3">Ver Productos</a>
+        </div>
+    {% endif %}
+</div>
+{% endblock %}

@@ -1,0 +1,42 @@
+{% extends "tienda/base.html" %}
+{% load static %}
+
+{% block title %}{{ producto.nombre }} - CrissStore{% endblock %}
+
+{% block content %}
+<div class="container mt-4">
+    <div class="row">
+        <div class="col-md-6">
+            <div class="shadow rounded overflow-hidden" style="height: 400px; background-color: #f8f9fa; padding: 20px;">
+                <img src="{{ producto.imagen.url }}" 
+                     class="w-100 h-100" 
+                     alt="{{ producto.nombre }}"
+                     style="object-fit: contain;">
+            </div>
+        </div>
+        <div class="col-md-6">
+            <h2 class="display-5 fw-bold mb-3">{{ producto.nombre }}</h2>
+            <p class="lead text-muted mb-4">{{ producto.descripcion }}</p>
+            <p class="h2 text-primary mb-4">${{ producto.precio }}</p>
+            <form method="post" action="{% url 'agregar_al_carrito' producto.id %}" class="mt-4">
+                {% csrf_token %}
+                <div class="mb-4">
+                    <label for="cantidad" class="form-label h5">Cantidad</label>
+                    <input type="number" 
+                           class="form-control form-control-lg" 
+                           id="cantidad" 
+                           name="cantidad" 
+                           value="1" 
+                           min="1"
+                           style="max-width: 200px;">
+                </div>
+                <button type="submit" 
+                        class="btn btn-primary btn-lg px-5"
+                        style="transition: all 0.3s ease;">
+                    Añadir al Carrito
+                </button>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,41 @@
+{% extends "tienda/base.html" %}
+{% load static %}
+
+{% block title %}Productos - CrissStore{% endblock %}
+
+{% block content %}
+<div class="container mt-4">
+    <h2 class="text-center mb-4 display-4">Todos los Productos</h2>
+    <div class="row g-4">
+        {% for producto in productos %}
+        <div class="col-md-4 mb-4">
+            <div class="card h-100 shadow-sm" style="transition: transform 0.3s ease;">
+                <div style="height: 300px; padding: 20px; background-color: #f8f9fa;">
+                    <img src="{{ producto.imagen.url }}" 
+                         class="card-img-top h-100 w-100" 
+                         alt="{{ producto.nombre }}" 
+                         style="object-fit: contain; transition: transform 0.3s ease;">
+                </div>
+                <div class="card-body d-flex flex-column">
+                    <h5 class="card-title fw-bold">{{ producto.nombre }}</h5>
+                    <p class="card-text text-muted">{{ producto.descripcion|truncatewords:20 }}</p>
+                    <p class="card-text h4 text-primary mt-auto">${{ producto.precio }}</p>
+                    <a href="{% url 'detalle_producto' producto.id %}" 
+                       class="btn btn-primary mt-3 w-100"
+                       style="transition: all 0.3s ease;">Ver Detalles</a>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+
+<style>
+    .card:hover {
+        transform: translateY(-5px);
+    }
+    .card:hover img {
+        transform: scale(1.05);
+    }
+</style>
+{% endblock %}

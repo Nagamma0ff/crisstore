@@ -1,0 +1,35 @@
+{% extends "tienda/base.html" %}
+{% load static %}
+
+{% block title %}Confirmación del Pedido - CrissStore{% endblock %}
+
+{% block content %}
+<div class="container mt-4">
+    <h2 class="mb-4">Resumen del Pedido</h2>
+    <div class="row">
+        <div class="col-md-8">
+            <h4 class="mb-3">Información del Comprador</h4>
+            <p><strong>Nombre:</strong> {{ pedido.nombre }}</p>
+            <p><strong>Apellido:</strong> {{ pedido.apellido }}</p>
+            <p><strong>RUT:</strong> {{ pedido.rut }}</p>
+            <p><strong>Dirección:</strong> {{ pedido.direccion }}</p>
+            <h4 class="mb-3">Forma de Pago</h4>
+            <p><strong>Método:</strong> {{ pedido.forma_pago|title }}</p>
+        </div>
+        <div class="col-md-4">
+            <h4 class="mb-3">Resumen de Productos</h4>
+            <ul class="list-group">
+                {% for item in detalles %}
+                <li class="list-group-item d-flex justify-content-between align-items-center">
+                    {{ item.producto.nombre }} x {{ item.cantidad }}
+                    <span>${{ item.subtotal }}</span>
+                </li>
+                {% endfor %}
+            </ul>
+            <hr>
+            <h5>Total: ${{ pedido.total }}</h5>
+        </div>
+    </div>
+</div>
+{% endblock %}
+

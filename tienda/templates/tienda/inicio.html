@@ -1,0 +1,116 @@
+{% extends "tienda/base.html" %}
+{% load static %}
+
+{% block title %}CrissStore{% endblock %}
+
+{% block content %}
+<div class="container mt-4">
+    <div id="carouselExampleDark" class="carousel carousel-dark slide mb-5 shadow-lg rounded overflow-hidden" data-bs-ride="carousel">
+        <div class="carousel-indicators">
+            <button type="button" data-bs-target="#carouselExampleDark" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+            <button type="button" data-bs-target="#carouselExampleDark" data-bs-slide-to="1" aria-label="Slide 2"></button>
+            <button type="button" data-bs-target="#carouselExampleDark" data-bs-slide-to="2" aria-label="Slide 3"></button>
+            <button type="button" data-bs-target="#carouselExampleDark" data-bs-slide-to="3" aria-label="Slide 4"></button>
+            <button type="button" data-bs-target="#carouselExampleDark" data-bs-slide-to="4" aria-label="Slide 5"></button>
+        </div>
+        <div class="carousel-inner">
+            <div class="carousel-item active" data-bs-interval="10000">
+                <div style="height: 500px; background-color: #f8f9fa; padding: 20px;">
+                    <img src="{% static 'img/Logitech G733.jpg' %}" class="d-block w-100 h-100" alt="G733" style="object-fit: contain;">
+                </div>
+                <div class="carousel-caption" style="background: rgba(0,0,0,0.7); border-radius: 10px; padding: 20px;">
+                    <h5 class="text-white">AUDIFONOS LOGITECH G733</h5>
+                    <p class="text-white">Para momentos donde se necesita claridad de audio cristalina.</p>
+                </div>
+            </div>
+            <div class="carousel-item" data-bs-interval="2000">
+                <div style="height: 500px; background-color: #f8f9fa; padding: 20px;">
+                    <img src="{% static 'img/Logitech Lightspeed G305.jpg' %}" class="d-block w-100 h-100" alt="G305" style="object-fit: contain;">
+                </div>
+                <div class="carousel-caption" style="background: rgba(0,0,0,0.7); border-radius: 10px; padding: 20px;">
+                    <h5 class="text-white">MOUSE LOGITECH LIGHTSPEED G305</h5>
+                    <p class="text-white">Diseñado para un rendimiento sin cables en juegos competitivos.</p>
+                </div>
+            </div>
+            <div class="carousel-item" data-bs-interval="2000">
+                <div style="height: 500px; background-color: #f8f9fa; padding: 20px;">
+                    <img src="{% static 'img/Teclado Logitech G Pro RGB.jpg' %}" class="d-block w-100 h-100" alt="G305" style="object-fit: contain;">
+                </div>
+                <div class="carousel-caption" style="background: rgba(0,0,0,0.7); border-radius: 10px; padding: 20px;">
+                    <h5 class="text-white">TECLADO LOGITECH G PRO RGB</h5>
+                    <p class="text-white">Perfecto para competiciones con un diseño compacto y retroiluminación RGB.</p>
+                </div>
+            </div>
+            <div class="carousel-item" data-bs-interval="2000">
+                <div style="height: 500px; background-color: #f8f9fa; padding: 20px;">
+                    <img src="{% static 'img/Logitech G335.jpg' %}"" class="d-block w-100 h-100" alt="G305" style="object-fit: contain;">
+                </div>
+                <div class="carousel-caption" style="background: rgba(0,0,0,0.7); border-radius: 10px; padding: 20px;">
+                    <h5 class="text-white">AUDIFONOS LOGITECH G335</h5>
+                    <p class="text-white">Audífonos ligeros y cómodos para largas sesiones de juego.</p>
+                </div>
+            </div>
+            <div class="carousel-item" data-bs-interval="2000">
+                <div style="height: 500px; background-color: #f8f9fa; padding: 20px;">
+                    <img src="{% static 'img/Razer Ornata V3 X Teclado.jpg' %}" class="d-block w-100 h-100" alt="G305" style="object-fit: contain;">
+                </div>
+                <div class="carousel-caption" style="background: rgba(0,0,0,0.7); border-radius: 10px; padding: 20px;">
+                    <h5 class="text-white">RAZER ORNATA V3 X TECLADO</h5>
+                    <p class="text-white">Teclado ergonómico con tecnología de teclas híbridas.</p>
+                </div>
+            </div>
+        </div>
+        <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleDark" data-bs-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Previous</span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleDark" data-bs-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Next</span>
+        </button>
+    </div>
+
+    <section class="productos mb-5">
+        <h2 class="text-center mb-4 display-4">Productos Destacados</h2>
+        <div class="row g-4">
+            {% for producto in productos_destacados %}
+            <div class="col-md-4 mb-4">
+                <div class="card h-100 shadow-sm" style="transition: transform 0.3s ease;">
+                    <div style="height: 300px; padding: 20px; background-color: #f8f9fa;">
+                        <img src="{{ producto.imagen.url }}" 
+                             class="card-img-top h-100 w-100" 
+                             alt="{{ producto.nombre }}" 
+                             style="object-fit: contain; transition: transform 0.3s ease;">
+                    </div>
+                    <div class="card-body d-flex flex-column">
+                        <h5 class="card-title fw-bold">{{ producto.nombre }}</h5>
+                        <p class="card-text text-muted">{{ producto.descripcion|truncatewords:20 }}</p>
+                        <p class="card-text h4 text-primary mt-auto">${{ producto.precio }}</p>
+                        <a href="{% url 'detalle_producto' producto.id %}" 
+                           class="btn btn-primary mt-3"
+                           style="transition: all 0.3s ease;">Ver Detalles</a>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </section>
+    
+    <section id="sobre-nosotros" class="py-5 px-3 rounded-3 mb-5" style="background-color: #f8f9fa;">
+        <div class="text-center">
+            <h2 class="display-4 mb-4">Sobre Nosotros</h2>
+            <p class="lead mb-0">Somos una tienda de tecnología con más de 10 años de experiencia, 
+                enfocada en traer los mejores productos para nuestros clientes.</p>
+        </div>
+    </section>
+</div>
+
+<style>
+    .card:hover {
+        transform: translateY(-5px);
+    }
+    .card:hover img {
+        transform: scale(1.05);
+    }
+</style>
+{% endblock %}

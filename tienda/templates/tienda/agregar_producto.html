@@ -1,0 +1,12 @@
+{% extends 'tienda/base.html' %}
+
+{% block content %}
+<div class="container mt-4">
+    <h2>Agregar Nuevo Producto</h2>
+    <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit" class="btn btn-primary">Guardar Producto</button>
+    </form>
+</div>
+{% endblock %}

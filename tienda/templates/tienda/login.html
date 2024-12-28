@@ -1,0 +1,88 @@
+{% extends "tienda/base.html" %}
+{% load static %}
+
+{% block title %}Iniciar Sesión - CrissStore{% endblock %}
+
+{% block content %}
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            {% if messages %}
+                {% for message in messages %}
+                    <div class="alert alert-{{ message.tags }} alert-dismissible fade show" role="alert">
+                        {{ message }}
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    </div>
+                {% endfor %}
+            {% endif %}
+            
+            <div class="card shadow">
+                <div class="card-header bg-primary text-white">
+                    <h2 class="text-center mb-0">Iniciar Sesión</h2>
+                </div>
+                <div class="card-body">
+                    <form method="post">
+                        {% csrf_token %}
+                        {% if form.errors %}
+                            <div class="alert alert-danger" role="alert">
+                                Por favor, corrija los errores a continuación.
+                            </div>
+                        {% endif %}
+                        <div class="mb-3">
+                            <label for="username" class="form-label">Nombre de usuario</label>
+                            <input type="text" 
+                                   class="form-control {% if form.username.errors %}is-invalid{% endif %}" 
+                                   id="username" 
+                                   name="username" 
+                                   required>
+                            {% if form.username.errors %}
+                                <div class="invalid-feedback">
+                                    {{ form.username.errors }}
+                                </div>
+                            {% endif %}
+                        </div>
+                        <div class="mb-3">
+                            <label for="password" class="form-label">Contraseña</label>
+                            <input type="password" 
+                                   class="form-control {% if form.password.errors %}is-invalid{% endif %}" 
+                                   id="password" 
+                                   name="password" 
+                                   required>
+                            {% if form.password.errors %}
+                                <div class="invalid-feedback">
+                                    {{ form.password.errors }}
+                                </div>
+                            {% endif %}
+                        </div>
+                        <div class="d-grid gap-2">
+                            <button type="submit" class="btn btn-primary btn-lg">
+                                Iniciar Sesión
+                            </button>
+                        </div>
+                    </form>
+                </div>
+                <div class="card-footer text-center">
+                    <p class="mb-0">¿No tienes una cuenta? 
+                        <a href="{% url 'registro' %}" class="text-primary">Regístrate aquí</a>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+    .card {
+        transition: transform 0.3s ease;
+    }
+    .card:hover {
+        transform: translateY(-5px);
+    }
+    .btn {
+        transition: all 0.3s ease;
+    }
+    .btn:hover {
+        transform: translateY(-2px);
+    }
+</style>
+{% endblock %}
